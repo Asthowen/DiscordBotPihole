@@ -1,5 +1,5 @@
 from discord.ext import commands
-import discord, asyncio, Utils
+import discord, Utils
 
 
 class OnReady(commands.Cog):
