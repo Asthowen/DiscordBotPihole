@@ -1,4 +1,4 @@
-import discord, Utils, time, csv, psutil
+import discord, Utils, time, psutil
 from discord.ext import commands, tasks
 
 
