@@ -1,6 +1,5 @@
-import discord
 from discord.ext import commands
-
+import discord
 import Utils
 
 
@@ -23,14 +22,20 @@ class Settings(commands.Cog):
                 await ctx.send(
                     f":white_check_mark: Vous avez correctement définis l'adresse de votre Pi-Hole sur : {args[1]} !")
             elif args[0] == "channel":
-                channel = args[1].replace("<", "").replace(">", "").replace("#", "")
+                try:
+                    channel = args[1].replace("<", "").replace(">", "").replace("#", "")
+                    channel_test = self.bot.get_guild(ctx.guild.id).get_channel(int(channel))
+                except:
+                    await ctx.send(
+                        f":x: Ce channel n'existe pas !")
+                    return
+
                 Utils.write_property_in_json_file("config/config.json", "channel", channel)
                 await ctx.send(
                     f":white_check_mark: Vous avez correctement définis le channel des stats de Pi-Hole dans : {args[1]} !")
         else:
-            await ctx.send(f":x: Cette commande n'existe pas, faite : `{Utils.get_property_in_json_file('config/config.json', 'prefix')}help`")
-
-
+            await ctx.send(
+                f":x: Cette commande n'existe pas, faites : `{Utils.get_property_in_json_file('config/config.json', 'prefix')}help`")
 
 
 def setup(bot):

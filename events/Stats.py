@@ -1,5 +1,8 @@
-import discord, Utils, time, psutil
 from discord.ext import commands, tasks
+import discord
+import psutil
+import Utils
+import time
 
 
 class Stats(commands.Cog):
@@ -15,25 +18,31 @@ class Stats(commands.Cog):
             return
 
         embed = discord.Embed(
-            colour=Utils.embedColor(),
+            colour=Utils.embed_color(),
             title="Stats :"
         )
-        embed.add_field(name="Requetes Aujourd'hui :", value="`" + str(Utils.get_response("dns_queries_today")) + "`", inline=True)
-        embed.add_field(name="Nombre de domaines bloqués :", value="`" + str(Utils.get_response("domains_being_blocked")) + "`", inline=True)
+        embed.add_field(name="Requetes Aujourd'hui :", value="`" + str(Utils.get_response("dns_queries_today")) + "`",
+                        inline=True)
+        embed.add_field(name="Nombre de domaines bloqués :",
+                        value="`" + str(Utils.get_response("domains_being_blocked")) + "`", inline=True)
         embed.add_field(name="** **", value="** **", inline=False)
-        embed.add_field(name="Pub bloquées :", value="`" + str(Utils.get_response("ads_blocked_today")) + "`", inline=True)
-        embed.add_field(name="Pourcentage de pub :", value="`" + str(round(int(Utils.get_response("ads_percentage_today")))) + "%`", inline=True)
+        embed.add_field(name="Pub bloquées :", value="`" + str(Utils.get_response("ads_blocked_today")) + "`",
+                        inline=True)
+        embed.add_field(name="Pourcentage de pub :",
+                        value="`" + str(round(int(Utils.get_response("ads_percentage_today")))) + "%`", inline=True)
         embed.add_field(name="** **", value="** **", inline=False)
-        embed.add_field(name="Nombre de clients :", value="`" + str(Utils.get_response("unique_clients")) + "`", inline=True)
-        embed.add_field(name="Total nombre de clients :", value="`" + str(Utils.get_response("clients_ever_seen")) + "`", inline=True)
+        embed.add_field(name="Nombre de clients :", value="`" + str(Utils.get_response("unique_clients")) + "`",
+                        inline=True)
+        embed.add_field(name="Total nombre de clients :",
+                        value="`" + str(Utils.get_response("clients_ever_seen")) + "`", inline=True)
         embed.add_field(name="** **", value="** **", inline=False)
         embed.add_field(name="PC Stats :", value="** **", inline=False)
         embed.add_field(name="** **", value="** **", inline=False)
         embed.add_field(name="CPU Usage : ", value=f"`{psutil.cpu_percent()} %`", inline=True)
         embed.add_field(name="Ping : ", value=f"`%i ms`" % round(self.bot.latency * 1000), inline=True)
-        ramUsed = psutil.virtual_memory().used / 1000000
-        ramTotal = psutil.virtual_memory().total / 1000000
-        embed.add_field(name="RAM :", value=f"`{round(ramUsed)}/{round(ramTotal)}mo`", inline=True)
+        ram_used = round(psutil.virtual_memory().used / 1000000)
+        ram_total = round(psutil.virtual_memory().total / 1000000)
+        embed.add_field(name="RAM :", value=f"`{ram_used}/{ram_total}mo`", inline=True)
         embed.set_footer(text="Dernière update : " + time.strftime('%d/%m/%y - %H:%M:%S', time.localtime()))
 
         if Utils.get_property_in_json_file("config/config.json", "message") == "":
