@@ -1,5 +1,6 @@
 from discord.ext import commands
-import discord, Utils
+import discord
+import Utils
 
 
 class OnReady(commands.Cog):
@@ -9,13 +10,10 @@ class OnReady(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         print('-------------------------------------------------------')
-        print('|               GetPiHoleStats is on                  |')
-        print('|           Developed by Asthowen#0001                |')
+        print('|               DiscordBotPihole is on                |')
         print('-------------------------------------------------------')
-        await self.bot.change_presence(status=discord.Status.online, activity=discord.Game(name=f"Prefix : " + Utils.get_property_in_json_file("config/config.json", "prefix")))
-
-
-
+        await self.bot.change_presence(status=discord.Status.online, activity=discord.Game(
+            name=f"Prefix : " + Utils.get_property_in_json_file("config/config.json", "prefix")))
 
 
 def setup(bot):

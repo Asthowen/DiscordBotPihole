@@ -1,8 +1,11 @@
 from discord.ext import commands
-import Utils, os
+import discord
+import Utils
+import os
 
 
-bot = commands.Bot(command_prefix=Utils.get_property_in_json_file("config/config.json", "prefix"))
+bot = commands.Bot(command_prefix=Utils.get_property_in_json_file("config/config.json", "prefix"), intents=discord.Intents.all())
+bot.remove_command('help')
 
 for filename in os.listdir('commands'):
     if filename.endswith('.py'):
