@@ -35,6 +35,20 @@ Ex :
 }
 ```
 
+### Install prerequisites
+
+* Execute command : ``pip3 install discord.py psutil``
+* Download project : ``git clone https://github.com/Asthowen/DiscordBotPihole.git`` or [zip](https://github.com/Asthowen/DiscordBotPihole/archive/master.zip). 
+
+### Launch
+
+* Go to bot folder (DiscordBotPihole)
+* Execute command : ``python3 Main.py``
+
 ## Author
 
 [<img width="64" src="https://avatars3.githubusercontent.com/u/59535754?s=400&u=48aecdd175dd2dd8867ae063f1973b64d298220b&v=4" alt="Asthowen">](https://github.com/Asthowen)
+
+## License
+
+**DiscordBotPihole | GNU General Public License v3.0**
