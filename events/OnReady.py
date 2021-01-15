@@ -13,7 +13,7 @@ class OnReady(commands.Cog):
         print('|               DiscordBotPihole is on                |')
         print('-------------------------------------------------------')
         await self.bot.change_presence(status=discord.Status.online, activity=discord.Game(
-            name=f"Prefix : " + Utils.get_property_in_json_file("config/config.json", "prefix")))
+            name=f"Prefix : {Utils.get_property_in_json_file('config/config.json', 'prefix')}"))
 
 
 def setup(bot):

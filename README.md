@@ -19,8 +19,14 @@ A discord bot for get Pi-hole stats.
 * Click on "Bot", then click on "Add Bot", then "Yes, do it"
 * Copy the bot token
 
+### Install prerequisites
+
+* Execute command : ``pip3 install discord.py psutil``
+* Download project : ``git clone https://github.com/Asthowen/DiscordBotPihole.git`` or [zip](https://github.com/Asthowen/DiscordBotPihole/archive/master.zip). 
+
 ### Add token to bot
 
+* Go to bot folder (DiscordBotPihole)
 * Open file config.json in config/config.json
 * On token key paste the token
 
@@ -35,14 +41,8 @@ Ex :
 }
 ```
 
-### Install prerequisites
-
-* Execute command : ``pip3 install discord.py psutil``
-* Download project : ``git clone https://github.com/Asthowen/DiscordBotPihole.git`` or [zip](https://github.com/Asthowen/DiscordBotPihole/archive/master.zip). 
-
 ### Launch
 
-* Go to bot folder (DiscordBotPihole)
 * Execute command : ``python3 Main.py``
 
 ## Author
@@ -51,4 +51,4 @@ Ex :
 
 ## License
 
-**DiscordBotPihole | GNU General Public License v3.0**
+**[DiscordBotPihole](https://github.com/Asthowen/DiscordBotPihole) | [Mozilla Public License 2.0](https://github.com/Asthowen/DiscordBotPihole/blob/master/LICENSE)**

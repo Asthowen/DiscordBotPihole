@@ -10,11 +10,12 @@ class Settings(commands.Cog):
 
     @commands.command()
     async def help(self, ctx):
+        prefix = Utils.get_property_in_json_file("config/config.json", "prefix")
         embed = discord.Embed(color=Utils.embed_color())
-        embed.set_author(name="Commandes de DiscordBotPihole :")
-        embed.add_field(name="Prefix", value=f"`set prefix <prefix>`", inline=False)
-        embed.add_field(name="PiHole url :", value=f"`set url <PiHole url>`", inline=False)
-        embed.add_field(name="Channel :", value=f"`set channel <channel>`", inline=False)
+        embed.set_author(name='Commandes de DiscordBotPihole :')
+        embed.add_field(name='Prefix', value=f'`{prefix}set prefix <prefix>`', inline=False)
+        embed.add_field(name='PiHole url :', value=f'`{prefix}set url <PiHole url>`', inline=False)
+        embed.add_field(name='Channel :', value=f'`{prefix}set channel <channel>`', inline=False)
         embed.set_footer(icon_url=ctx.guild.icon_url,
                          text=f"Demandé par {ctx.author.display_name} • Aujourd'hui à {time.strftime('%H:%M:%S', time.localtime())}")
         await ctx.send(embed=embed)
