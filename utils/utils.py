@@ -1,17 +1,5 @@
 import discord
-import aiohttp
 import json
-
-
-def get_response(key: str):
-    url = get_property('pi_hole_web_address')
-
-    async with aiohttp.ClientSession() as s:
-        async with s.get(url + 'admin/api.php' if url[-1] == '/' else url + '/admin/api.php') as r:
-            if r.status == 200:
-                content = await r.json()
-
-    return None if content is None else content[key]
 
 
 def get_property(value: str):
