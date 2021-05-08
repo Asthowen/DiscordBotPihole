@@ -20,10 +20,14 @@ class Settings(commands.Cog):
                 utils.write_property('prefix', args[1])
                 await ctx.send(
                     f':white_check_mark: Vous avez correctement modifié le prefix : {actual_prefix} par {args[1]} !')
-                await self.bot.change_presence(status=discord.Status.online, activity=discord.Game(
-                    name=f'Prefix : {args[1]}'))
+                await self.bot.change_presence(
+                    status=discord.Status.online,
+                    activity=discord.Game(
+                        name=f'Prefix : {args[1]}'
+                    )
+                )
             elif args[0] == 'url':
-                utils.write_property("utils/utils.json", "pi_hole_web_address", args[1])
+                utils.write_property('pi_hole_web_address', args[1])
                 await ctx.send(
                     f":white_check_mark: Vous avez correctement définis l'adresse de votre Pi-Hole sur : {args[1]} !")
             elif args[0] == "channel":
@@ -31,12 +35,10 @@ class Settings(commands.Cog):
                     channel = int(args[1].replace("<", "").replace(">", "").replace("#", ""))
                     channel = discord.utils.get(ctx.guild.text_channels, id=channel)
                 except ValueError:
-                    await ctx.send(":x: Ce channel n'existe pas !")
-                    return
+                    return await ctx.send(":x: Ce channel n'existe pas !")
                 else:
                     if channel is None:
-                        await ctx.send(":x: Ce channel n'existe pas !")
-                        return
+                        return await ctx.send(":x: Ce channel n'existe pas !")
 
                     utils.write_property('channel', channel.id)
                     await ctx.send(
