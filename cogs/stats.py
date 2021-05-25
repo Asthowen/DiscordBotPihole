@@ -16,7 +16,7 @@ class Stats(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
-        print('DiscordBotPi-hole is on!')
+        print('DiscordBotPiHole is on!')
 
         await self.bot.change_presence(
             status=discord.Status.online,
@@ -56,17 +56,17 @@ class Stats(commands.Cog):
             inline=False
         )
         embed.add_field(
-            name="Requetes Aujourd'hui :",
+            name="Requêtes aujourd'hui :",
             value=f"`{content['dns_queries_today']}`",
             inline=False
         )
         embed.add_field(
-            name='Pub bloquées :',
+            name="Pub bloquées aujourd'hui :",
             value=f"`{content['ads_blocked_today']}`",
             inline=False
         )
         embed.add_field(
-            name='Pourcentage de pub :',
+            name="Pourcentage de pub bloquées aujourd'hui :",
             value=f"`{round(content['ads_percentage_today'])}%`",
             inline=False
         )

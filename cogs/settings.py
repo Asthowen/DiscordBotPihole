@@ -19,7 +19,8 @@ class Settings(commands.Cog):
                 actual_prefix = utils.get_property('prefix')
                 utils.write_property('prefix', args[1])
                 await ctx.send(
-                    f':white_check_mark: Vous avez correctement modifié le prefix : {actual_prefix} par {args[1]} !')
+                    f':white_check_mark: Vous avez correctement modifié le prefix : {actual_prefix} par {args[1]} !'
+                )
                 await self.bot.change_presence(
                     status=discord.Status.online,
                     activity=discord.Game(
@@ -29,10 +30,11 @@ class Settings(commands.Cog):
             elif args[0] == 'url':
                 utils.write_property('pi_hole_web_address', args[1])
                 await ctx.send(
-                    f":white_check_mark: Vous avez correctement définis l'adresse de votre Pi-Hole sur : {args[1]} !")
+                    f":white_check_mark: Vous avez correctement définis l'adresse de votre Pi-Hole sur : {args[1]} !"
+                )
             elif args[0] == "channel":
                 try:
-                    channel = int(args[1].replace("<", "").replace(">", "").replace("#", ""))
+                    channel = int(args[1].replace('<', '').replace('>', '').replace('#', ''))
                     channel = discord.utils.get(ctx.guild.text_channels, id=channel)
                 except ValueError:
                     return await ctx.send(":x: Ce channel n'existe pas !")
@@ -42,7 +44,9 @@ class Settings(commands.Cog):
 
                     utils.write_property('channel', channel.id)
                     await ctx.send(
-                        f':white_check_mark: Vous avez correctement définis le channel des stats de Pi-Hole dans : {args[1]} !')
+                        f':white_check_mark: Vous avez correctement définis le channel des stats de Pi-Hole dans : {args[1]} !'
+                    )
         else:
             await ctx.send(
-                f":x: Cette commande n'existe pas, faites : `{utils.get_property('prefix')}help`")
+                f":x: Cette commande n'existe pas, faites : `{utils.get_property('prefix')}help`"
+            )

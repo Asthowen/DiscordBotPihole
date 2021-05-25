@@ -3,9 +3,12 @@ from utils import utils
 import discord
 import os
 
-print("Start DiscordBotPi-hole...")
+print("Start DiscordBotPiHole...")
 
-bot = commands.Bot(command_prefix=utils.get_property('prefix'), intents=discord.Intents.all())
+bot = commands.Bot(
+    command_prefix=utils.get_property('prefix'),
+    intents=discord.Intents.all()
+)
 bot.remove_command('help')
 
 for filename in os.listdir('cogs'):

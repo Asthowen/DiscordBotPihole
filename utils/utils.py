@@ -2,7 +2,7 @@ import discord
 import json
 
 
-def get_property(value: str):
+def get_property(value: str) -> str:
     with open('utils/config.json', 'r') as f:
         info1 = json.load(f)
     return info1[str(value)]
@@ -16,5 +16,5 @@ def write_property(data_category: str, data_to_write: str):
         json.dump(value, f, indent=4)
 
 
-def embed_color():
+def embed_color() -> discord.Colour:
     return discord.Colour.from_rgb(255, 223, 0)
