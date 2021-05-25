@@ -5,10 +5,10 @@ import time
 
 
 def setup(bot):
-    bot.add_cog(Settings(bot))
+    bot.add_cog(Help(bot))
 
 
-class Settings(commands.Cog):
+class Help(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 

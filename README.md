@@ -1,5 +1,5 @@
 # DiscordBotPihole
-A discord bot for get Pi-hole stats.
+A discord bot for get [Pi-Hole](https://pi-hole.net/) stats.
 
 ## Made with
 * [**discord.py**](https://pypi.org/project/discord.py/)
@@ -17,8 +17,8 @@ A discord bot for get Pi-hole stats.
 * Copy the bot token
 
 ### Install prerequisites
-* Execute command: ``pip3 install discord.py psutil``
-* Download project: ``git clone https://github.com/Asthowen/DiscordBotPihole.git`` or [zip](https://github.com/Asthowen/DiscordBotPihole/archive/master.zip). 
+* Execute command: `python3 -m pip install -U discord.py psutil`
+* Download project: `git clone https://github.com/Asthowen/DiscordBotPihole.git` or [zip](https://github.com/Asthowen/DiscordBotPihole/archive/main.zip). 
 
 ### Add token to bot
 * Go to bot folder (DiscordBotPihole)
@@ -43,4 +43,4 @@ Example:
 [<img width="64" src="https://avatars3.githubusercontent.com/u/59535754?s=400&u=48aecdd175dd2dd8867ae063f1973b64d298220b&v=4" alt="Asthowen">](https://github.com/Asthowen)
 
 ## License
-**[DiscordBotPihole](https://github.com/Asthowen/DiscordBotPihole) | [Mozilla Public License 2.0](https://github.com/Asthowen/DiscordBotPihole/blob/master/LICENSE)**
+**[DiscordBotPihole](https://github.com/Asthowen/DiscordBotPihole) | [Mozilla Public License 2.0](https://github.com/Asthowen/DiscordBotPihole/blob/main/LICENSE)**
