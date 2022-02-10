@@ -25,7 +25,6 @@ jobs:
         run: |
           sudo apt install openssl libssl-dev pkg-config librust-openssl-sys-dev musl-tools -y
           cargo install cargo-get && cargo clean
-          rustup target add x86_64-pc-windows-gnu && rustup toolchain install stable-x86_64-pc-windows-gnu
           echo "::set-output name=APP_VERSION::$(cargo get version)"
 
       - name: Build Linux x86_64
@@ -33,12 +32,6 @@ jobs:
         with:
           command: build
           args: --release --target x86_64-unknown-linux-musl
-
-      - name: Build Windows x86_64
-        uses: actions-rs/cargo@v1
-        with:
-          command: build
-          args: --release --target x86_64-pc-windows-gnu
 
       - name: Get release
         id: get_release
@@ -56,14 +49,4 @@ jobs:
           upload_url: ${{ steps.get_release.outputs.upload_url }}
           asset_path: ./target/x86_64-unknown-linux-musl/release/discord_bot_pihole
           asset_name: discord_bot_pihole-${{ steps.install_dependencies.outputs.APP_VERSION }}-x86_64
-          asset_content_type: application/octet-stream
-
-      - name: Upload Windows executable to releases
-        uses: actions/upload-release-asset@v1.0.2
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        with:
-          upload_url: ${{ steps.get_release.outputs.upload_url }}
-          asset_path: ./target/x86_64-pc-windows-gnu/release/discord_bot_pihole.exe
-          asset_name: discord-bot-pihole-windows-${{ steps.install_dependencies.outputs.APP_VERSION }}-x86_64.exe
           asset_content_type: application/octet-stream

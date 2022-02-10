@@ -37,7 +37,7 @@ You must fill this file and rename it to `.env`.
 ### Start
 Go to the folder containing your two previously downloaded files and start the command:
 ```bash
-
+./filename
 ```
 
 ## Author
