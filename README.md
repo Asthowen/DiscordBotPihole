@@ -36,8 +36,15 @@ You must fill this file and rename it to `.env`.
 
 ### Start
 Go to the folder containing your two previously downloaded files and start the command:
+<br>
+Windows:
 ```bash
+.\fileName
+```
 
+Linux:
+```bash
+./fileName
 ```
 
 ## Author
