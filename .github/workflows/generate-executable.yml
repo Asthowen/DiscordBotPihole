@@ -1,0 +1,69 @@
+name: Generate executables and post them to release
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  generate-executables:
+    name: Generate executables
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+          target: x86_64-unknown-linux-musl
+
+      - name: Install dependencies
+        id: install_dependencies
+        run: |
+          sudo apt install openssl libssl-dev pkg-config librust-openssl-sys-dev musl-tools -y
+          cargo install cargo-get && cargo clean
+          rustup target add x86_64-pc-windows-gnu && rustup toolchain install stable-x86_64-pc-windows-gnu
+          echo "::set-output name=APP_VERSION::$(cargo get version)"
+
+      - name: Build Linux x86_64
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+          args: --release --target x86_64-unknown-linux-musl
+
+      - name: Build Windows x86_64
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+          args: --release --target x86_64-pc-windows-gnu
+
+      - name: Get release
+        id: get_release
+        uses: leahlundqvist/get-release@v1.3.1
+        with:
+          tag_name: ${{ steps.install_dependencies.outputs.APP_VERSION }}
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Upload Linux executable to releases
+        uses: actions/upload-release-asset@v1.0.2
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.get_release.outputs.upload_url }}
+          asset_path: ./target/x86_64-unknown-linux-musl/release/discord_bot_pihole
+          asset_name: discord_bot_pihole-${{ steps.install_dependencies.outputs.APP_VERSION }}-x86_64
+          asset_content_type: application/octet-stream
+
+      - name: Upload Windows executable to releases
+        uses: actions/upload-release-asset@v1.0.2
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.get_release.outputs.upload_url }}
+          asset_path: ./target/x86_64-pc-windows-gnu/release/discord_bot_pihole.exe
+          asset_name: discord-bot-pihole-windows-${{ steps.install_dependencies.outputs.APP_VERSION }}-x86_64.exe
+          asset_content_type: application/octet-stream
