@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  discord-bot-pihole:
+    build:
+      context: ../
+      dockerfile: ./docker/Dockerfile
+    image: discord-bot-pihole:latest
+    container_name: discord-bot-pihole
+    restart: always
+    network_mode: 'host'
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 50m
+        reservations:
+          memory: 15M

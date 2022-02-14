@@ -7,8 +7,6 @@ use log::LevelFilter;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {
-
-
     let logger = SimpleLogger::new()
         .with_level(LevelFilter::Off)
         .with_module_level("discord_bot_pihole", LevelFilter::Info)

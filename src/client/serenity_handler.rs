@@ -20,21 +20,9 @@ pub struct SerenityHandler;
 
 #[async_trait]
 impl EventHandler for SerenityHandler {
-    async fn ready(&self, ctx: Context, _ready: Ready) {
-        log::info!("DiscordBotPiHole is connected!");
-
-        ctx.set_activity(Activity::watching("pi-hole.net")).await;
-
-        self.create_commands(&ctx).await;
-    }
-
-    async fn interaction_create(&self, ctx: Context, interaction: Interaction) {
-        if let Interaction::ApplicationCommand(mut command) = interaction {
-            self.run_command(&ctx, &mut command).await.unwrap();
-        }
-    }
     async fn cache_ready(&self, ctx: Context, _guilds: Vec<GuildId>) {
         log::info!("DiscordBotPiHole cache built!");
+
         let mut pi_hole_url: String = std::env::var("PI_HOLE_URL").unwrap();
         let pi_hole_last_char: char = match pi_hole_url.chars().last() {
             None => {
@@ -67,6 +55,18 @@ impl EventHandler for SerenityHandler {
                 tokio::time::sleep(std::time::Duration::from_secs(60)).await;
             }
         });
+    }
+    async fn ready(&self, ctx: Context, _ready: Ready) {
+        log::info!("DiscordBotPiHole is connected!");
+
+        ctx.set_activity(Activity::watching("pi-hole.net")).await;
+
+        self.create_commands(&ctx).await;
+    }
+    async fn interaction_create(&self, ctx: Context, interaction: Interaction) {
+        if let Interaction::ApplicationCommand(mut command) = interaction {
+            self.run_command(&ctx, &mut command).await.unwrap();
+        }
     }
 }
 

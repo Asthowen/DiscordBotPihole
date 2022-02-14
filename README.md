@@ -1,3 +1,4 @@
+<!--suppress HtmlDeprecatedAttribute -->
 <h1 align="center">
   DiscordBotPihole
 </h1>
@@ -16,32 +17,57 @@
     <strong>A Discord bot for get Pi-Hole stats written in Rust.</strong>
 </h3>
 
-## Use
-### Create a discord application
-* Go to https://discord.com/developers/applications
-* Click on "New Application"
-* Enter AppName and then click on "Create"
+## Usage
+To use this bot you must create a Discord application.
 
-### Create Bot and enable intents
-* Click on "Bot", then click on "Add Bot", then "Yes, do it"
-* Copy the bot token
+Create a Discord application:
 
-## Install
-### Configure
-Go to https://github.com/Asthowen/DiscordBotPihole/releases/latest and download executable for your system. 
-<br>
-Once done, you can download the sample configuration file: https://github.com/Asthowen/DiscordBotPihole/blob/main/example.env
-<br>
-You must fill this file and rename it to `.env`.
+* Go to Discord Developers [Applications](https://discord.com/developers/applications) page.
+* Click on "**New Application**".
+* Enter a name for your application in the "**Name**" field.
+* Click on "**Create**".
 
-### Start
-Go to the folder containing your two previously downloaded files and start the command:
+Create a bot user:
+* On the page for your application, click on menu "**Bot**" and then click on button "**Add Bot**".
+* Click "**Yes, do it!**" when popup appeared.
+* Now that your bot is created, click on button "Copy" under token section to copy your bot's token, keep this token.
+
+## Installation
+### Manually
+Start by cloning the repo:
 ```bash
-./filename
+git clone https://github.com/Asthowen/DiscordBotPihole.git
+```
+**For the next step you need to have Rust and cargo installed on your PC, for that follow the [official documentation](https://www.rust-lang.org/tools/install).**
+
+Now switch to project folder and compile a release:
+```bash
+cd DiscordBotPihole && cargo build --release
 ```
 
+Your executable will be in the `target/release/` folder, it is named `discord_bot_pihole`.
+
+### Docker
+Start by cloning the repo:
+```bash
+git clone https://github.com/Asthowen/DiscordBotPihole.git
+```
+
+Now switch to project folder and build the container with docker-compose:
+```bash
+cd DiscordBotPihole && docker-compose -f ./docker/docker-compose.yml up -d --build
+```
+
+### With release
+This repo contains compiled bot executables for Windows and Linux, you can find them [here](https://github.com/Asthowen/DiscordBotPihole/releases/latest).
+<br>
+You just need to download and launch it according to your operating system.
+
+## Configuration
+To configure this bot, just use the example configuration: [`example.env`](https://github.com/Asthowen/DiscordBotPihole/blob/main/example.env), you just have to rename it to `.env` and complete it.
+
 ## Author
-[<img width="64" src="https://avatars3.githubusercontent.com/u/59535754?s=400&u=48aecdd175dd2dd8867ae063f1973b64d298220b&v=4" alt="Asthowen">](https://github.com/Asthowen)
+[<img width="45" src="https://avatars3.githubusercontent.com/u/59535754?s=400&u=48aecdd175dd2dd8867ae063f1973b64d298220b&v=4" alt="Asthowen">](https://github.com/Asthowen)
 
 ## License
 **[DiscordBotPihole](https://github.com/Asthowen/DiscordBotPihole) | [Mozilla Public License 2.0](https://github.com/Asthowen/DiscordBotPihole/blob/main/LICENSE)**

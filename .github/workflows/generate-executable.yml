@@ -16,6 +16,7 @@ jobs:
       - name: Install toolchain
         uses: actions-rs/toolchain@v1
         with:
+          profile: minimal
           toolchain: stable
           override: true
           target: x86_64-unknown-linux-musl
@@ -23,15 +24,8 @@ jobs:
       - name: Install dependencies
         id: install_dependencies
         run: |
-          sudo apt install openssl libssl-dev pkg-config librust-openssl-sys-dev musl-tools -y
           cargo install cargo-get && cargo clean
           echo "::set-output name=APP_VERSION::$(cargo get version)"
-
-      - name: Build Linux x86_64
-        uses: actions-rs/cargo@v1
-        with:
-          command: build
-          args: --release --target x86_64-unknown-linux-musl
 
       - name: Get release
         id: get_release
@@ -41,12 +35,132 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
-      - name: Upload Linux executable to releases
+      - name: Build Linux x86_64
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+          args: --release --target x86_64-unknown-linux-musl
+          use-cross: true
+
+      - name: Upload Linux x86_64 executable to releases
         uses: actions/upload-release-asset@v1.0.2
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.get_release.outputs.upload_url }}
           asset_path: ./target/x86_64-unknown-linux-musl/release/discord_bot_pihole
-          asset_name: discord_bot_pihole-${{ steps.install_dependencies.outputs.APP_VERSION }}-x86_64
+          asset_name: discord_bot_pihole-${{ steps.install_dependencies.outputs.APP_VERSION }}-x86_64-linux
+          asset_content_type: application/octet-stream
+
+      - name: Build Linux aarch64
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+          args: --release --target aarch64-unknown-linux-musl
+          use-cross: true
+
+      - name: Upload Linux aarch64 executable to releases
+        uses: actions/upload-release-asset@v1.0.2
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.get_release.outputs.upload_url }}
+          asset_path: ./target/aarch64-unknown-linux-musl/release/discord_bot_pihole
+          asset_name: discord_bot_pihole-${{ steps.install_dependencies.outputs.APP_VERSION }}-aarch64-linux
+          asset_content_type: application/octet-stream
+
+      - name: Build Linux arm
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+          args: --release --target arm-unknown-linux-musleabi
+          use-cross: true
+
+      - name: Upload Linux arm executable to releases
+        uses: actions/upload-release-asset@v1.0.2
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.get_release.outputs.upload_url }}
+          asset_path: ./target/arm-unknown-linux-musleabi/release/discord_bot_pihole
+          asset_name: discord_bot_pihole-${{ steps.install_dependencies.outputs.APP_VERSION }}-arm-linux
+          asset_content_type: application/octet-stream
+
+      - name: Build FreeBSD x86_64
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+          args: --release --target x86_64-unknown-freebsd
+          use-cross: true
+
+      - name: Upload FreeBSD x86_64 executable to releases
+        uses: actions/upload-release-asset@v1.0.2
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.get_release.outputs.upload_url }}
+          asset_path: ./target/x86_64-unknown-freebsd/release/discord_bot_pihole
+          asset_name: discord_bot_pihole-${{ steps.install_dependencies.outputs.APP_VERSION }}-x86_64-freebsd
+          asset_content_type: application/octet-stream
+
+      - name: Build FreeBSD i686
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+          args: --release --target i686-unknown-freebsd
+          use-cross: true
+
+      - name: Upload FreeBSD i686 executable to releases
+        uses: actions/upload-release-asset@v1.0.2
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.get_release.outputs.upload_url }}
+          asset_path: ./target/i686-unknown-freebsd/release/discord_bot_pihole
+          asset_name: discord_bot_pihole-${{ steps.install_dependencies.outputs.APP_VERSION }}-i686-freebsd
+          asset_content_type: application/octet-stream
+
+  generate-executable-macos:
+    runs-on: macos-latest
+    name: Generation of MacOS x86_64 executable
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          default: true
+
+      - name: Install dependencies
+        id: install_dependencies
+        run: |
+          cargo install cargo-get
+          echo "::set-output name=APP_VERSION::$(cargo get version)"
+
+      - name: Build binary
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+          args: --release
+          use-cross: true
+
+      - name: Get release
+        id: get_release
+        uses: leahlundqvist/get-release@v1.3.1
+        with:
+          tag_name: ${{ steps.install_dependencies.outputs.APP_VERSION }}
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Upload MacOS x86_64 to releases
+        uses: actions/upload-release-asset@v1.0.2
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.get_release.outputs.upload_url }}
+          asset_path: ./target/release/discord_bot_pihole
+          asset_name: discord_bot_pihole-${{ steps.install_dependencies.outputs.APP_VERSION }}-x86_64-macos
           asset_content_type: application/octet-stream
