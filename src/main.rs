@@ -1,6 +1,6 @@
+use discord_bot_pihole::utils::exit_if_keys_not_exist;
 use discord_bot_pihole::client::client::Client;
 use simple_logger::SimpleLogger;
-use discord_bot_pihole::utils;
 use std::error::Error;
 use log::LevelFilter;
 
@@ -21,10 +21,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
         std::process::exit(1);
     }
     dotenv::dotenv().ok();
-    utils::exit_if_key_not_exist("DISCORD_TOKEN");
-    utils::exit_if_key_not_exist("DISCORD_APP_ID");
-    utils::exit_if_key_not_exist("PI_HOLE_URL");
-    utils::exit_if_key_not_exist("CHANNEL_ID");
+    exit_if_keys_not_exist(&["DISCORD_TOKEN", "DISCORD_APP_ID", "PI_HOLE_URL", "CHANNEL_ID"]);
 
     log::info!("Start DiscordBotPiHole...");
 
