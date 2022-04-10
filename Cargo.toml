@@ -1,13 +1,16 @@
 [package]
 name = "discord_bot_pihole"
 version = "0.0.1"
-edition = "2021"
 authors = ["Asthowen<contact@asthowen.fr>"]
+edition = "2021"
 description = "A discord bot for get Pi-Hole stats written in Rust."
-license = "Mozilla Public License 2.0"
+repository = "https://github.com/Asthowen/DiscordBotPihole"
+readme = "README.md"
+license = "MPL-2.0"
 
 [profile.release]
 codegen-units = 1
+strip = true
 lto = true
 
 [dependencies]
