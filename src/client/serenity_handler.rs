@@ -1,19 +1,13 @@
-use crate::commands::{
-    infos::infos, message_updater::update_message
-};
+use crate::commands::{infos::infos, message_updater::update_message};
 use serenity::{
     async_trait, client::{Context, EventHandler}, prelude::SerenityError,
     model::{
-        gateway::Ready, prelude::Activity,
+        gateway::Ready, prelude::Activity, id::GuildId, Permissions,
         interactions::{
-            application_command::{
-                ApplicationCommand, ApplicationCommandInteraction
-            },
+            application_command::{ApplicationCommand, ApplicationCommandInteraction},
             Interaction,
-        },
-        id::GuildId
-    },
-
+        }
+    }
 };
 
 pub struct SerenityHandler;
@@ -88,7 +82,7 @@ impl SerenityHandler {
                     command
                         .name("infos")
                         .description("Display information about the bot.")
-                        .default_permission(true)
+                        .default_member_permissions(Permissions::USE_SLASH_COMMANDS)
                 })
         }).await.unwrap()
     }

@@ -14,29 +14,30 @@ strip = true
 lto = true
 
 [dependencies]
-proctitle = "0.1.1"
-serde_json = "1.0"
-reqwest = "0.11.8"
-chrono = "0.4.19"
-dotenv = "0.15"
+openssl-src = "^111.20"
+serde_json = "^1.0.81"
+proctitle = "^0.1.1"
+reqwest = "^0.11.10"
+chrono = "^0.4.19"
+dotenv = "^0.15.0"
 
 [dependencies.openssl]
-version = "0.10"
+version = "^0.10.40"
 features = ["vendored"]
 
 [dependencies.log]
-version = "^0.4.14"
+version = "^0.4.17"
 features = ["std"]
 
 [dependencies.serenity]
-version = "0.10.10"
+version = "^0.11.2"
 default-features = false
 features = ["cache", "collector", "client", "gateway", "model", "rustls_backend", "unstable_discord_api"]
 
 [dependencies.tokio]
-version = "1.0"
+version = "^1.19.2"
 features = ["macros", "rt-multi-thread", "signal"]
 
 [dependencies.simple_logger]
-version = "2.1.0"
+version = "^2.1.0"
 features = ["timestamps"]

@@ -1,4 +1,5 @@
 use crate::client::serenity_handler::SerenityHandler;
+use serenity::prelude::GatewayIntents;
 use std::{env, error::Error};
 
 pub struct Client {
@@ -15,7 +16,7 @@ impl Client {
             }
         };
 
-        let channel_id: u64 = match std::env::var("DISCORD_APP_ID") {
+        let channel_id: u64 = match env::var("DISCORD_APP_ID") {
             Ok(channel_id) => match channel_id.parse::<u64>() {
                 Ok(channel_id) => channel_id,
                 Err(error) => {
@@ -29,7 +30,8 @@ impl Client {
             }
         };
 
-        let client: serenity::Client = serenity::Client::builder(discord_token)
+        let intents: GatewayIntents = GatewayIntents::GUILD_MEMBERS | GatewayIntents::GUILD_MESSAGES;
+        let client: serenity::Client = serenity::Client::builder(discord_token, intents)
             .event_handler(SerenityHandler)
             .application_id(channel_id)
             .await?;
