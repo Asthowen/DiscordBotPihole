@@ -196,13 +196,13 @@ dependencies = [
 
 [[package]]
 name = "discord_bot_pihole"
-version = "0.0.1"
+version = "0.0.2"
 dependencies = [
  "chrono",
  "dotenv",
  "log",
  "openssl",
- "openssl-src",
+ "openssl-src 300.0.7+3.0.3",
  "proctitle",
  "reqwest",
  "serde_json",
@@ -724,6 +724,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "openssl-src"
+version = "300.0.7+3.0.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0f0e85632b936bdfd145e98385e90da446b0574485d53be5627ebb9eeece0fa2"
+dependencies = [
+ "cc",
+]
+
+[[package]]
 name = "openssl-sys"
 version = "0.9.74"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -732,7 +741,7 @@ dependencies = [
  "autocfg",
  "cc",
  "libc",
- "openssl-src",
+ "openssl-src 111.20.0+1.1.1o",
  "pkg-config",
  "vcpkg",
 ]
