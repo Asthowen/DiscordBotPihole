@@ -1,2 +1,2 @@
 pub mod serenity_handler;
-pub mod client;
+pub mod discord_client;

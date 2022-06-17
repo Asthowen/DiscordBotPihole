@@ -12,7 +12,7 @@ pub async fn update_message(ctx: &Context, pi_hole_url: &String, channel_id: &u6
     let json_value: Value = response.json().await.unwrap();
 
     let status: &String = &json_value["status"].as_str().unwrap().to_string();
-    let status_to_print: String = status[0..1].to_uppercase().to_string() + &status[1..].to_string();
+    let status_to_print: String = status[0..1].to_uppercase() + &status[1..].to_string();
 
     let mut embed: CreateEmbed = CreateEmbed::default();
     embed.title("Pi-Hole stats:");

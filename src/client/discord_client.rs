@@ -8,7 +8,7 @@ pub struct Client {
 
 impl Client {
     pub async fn new() -> Result<Client, Box<dyn Error>> {
-        let discord_token = match env::var("DISCORD_TOKEN") {
+        let discord_token: String = match env::var("DISCORD_TOKEN") {
             Ok(token) => token,
             Err(error) => {
                 log::error!("An error occurred while sending the message: {}", error);

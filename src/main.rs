@@ -1,5 +1,5 @@
 use discord_bot_pihole::utils::exit_if_keys_not_exist;
-use discord_bot_pihole::client::client::Client;
+use discord_bot_pihole::client::discord_client::Client;
 use simple_logger::SimpleLogger;
 use std::error::Error;
 use log::LevelFilter;
@@ -33,10 +33,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
         }
     });
 
-    match tokio::signal::ctrl_c().await {
-        Ok(()) => {},
-        Err(_) => {}
-    }
+    if let Ok(()) = tokio::signal::ctrl_c().await {}
     bot_task.abort();
     log::warn!("Program stopped by the user.");
 

@@ -66,7 +66,7 @@ impl EventHandler for SerenityHandler {
 
 impl SerenityHandler {
     async fn run_command(
-        &self, ctx: &Context, command: &mut ApplicationCommandInteraction,
+        &self, ctx: &Context, command: &mut ApplicationCommandInteraction
     ) -> Result<(), SerenityError> {
         match command.data.name.as_str() {
             "infos" => infos(ctx, command).await,
