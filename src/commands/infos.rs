@@ -1,13 +1,17 @@
 use crate::utils::current_version;
 use serenity::{
-    client::Context, prelude::SerenityError, builder::CreateEmbed, builder::CreateEmbedAuthor,
-    model::interactions::{
+    builder::CreateEmbed,
+    builder::CreateEmbedAuthor,
+    client::Context,
+    model::application::interaction::{
         application_command::ApplicationCommandInteraction, InteractionResponseType,
     },
+    prelude::SerenityError,
 };
 
 pub async fn infos(
-    ctx: &Context, interaction: &mut ApplicationCommandInteraction
+    ctx: &Context,
+    interaction: &mut ApplicationCommandInteraction,
 ) -> Result<(), SerenityError> {
     let mut author: CreateEmbedAuthor = CreateEmbedAuthor::default();
     author.icon_url("https://wp-cdn.pi-hole.net/wp-content/uploads/2016/12/Vortex-R.webp");
@@ -21,9 +25,11 @@ pub async fn infos(
     embed.set_author(author);
     embed.description(description);
 
-    interaction.create_interaction_response(&ctx.http, |response| {
-        response
-            .kind(InteractionResponseType::ChannelMessageWithSource)
-            .interaction_response_data(|message| message.add_embed(embed))
-    }).await
+    interaction
+        .create_interaction_response(&ctx.http, |response| {
+            response
+                .kind(InteractionResponseType::ChannelMessageWithSource)
+                .interaction_response_data(|message| message.add_embed(embed))
+        })
+        .await
 }

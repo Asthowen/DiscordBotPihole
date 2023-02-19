@@ -1,2 +1,2 @@
-pub mod message_updater;
 pub mod infos;
+pub mod message_updater;

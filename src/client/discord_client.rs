@@ -20,17 +20,24 @@ impl Client {
             Ok(channel_id) => match channel_id.parse::<u64>() {
                 Ok(channel_id) => channel_id,
                 Err(error) => {
-                    log::error!("An error occurred while parsing the Discord app ID: {}", error);
+                    log::error!(
+                        "An error occurred while parsing the Discord app ID: {}",
+                        error
+                    );
                     std::process::exit(1);
                 }
             },
             Err(error) => {
-                log::error!("An error occurred while parsing the channel Discord app ID: {}", error);
+                log::error!(
+                    "An error occurred while parsing the channel Discord app ID: {}",
+                    error
+                );
                 std::process::exit(1);
             }
         };
 
-        let intents: GatewayIntents = GatewayIntents::GUILD_MEMBERS | GatewayIntents::GUILD_MESSAGES;
+        let intents: GatewayIntents =
+            GatewayIntents::GUILD_MEMBERS | GatewayIntents::GUILD_MESSAGES;
         let client: serenity::Client = serenity::Client::builder(discord_token, intents)
             .event_handler(SerenityHandler)
             .application_id(channel_id)
