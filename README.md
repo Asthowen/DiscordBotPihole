@@ -5,17 +5,21 @@
         <a href="https://www.rust-lang.org/">
             <img src="https://img.shields.io/badge/Rust-000000?style=for-the-badge&logo=rust&logoColor=white" alt="Made with Rust">
         </a>
-        <a href="https://github.com/Asthowen/DiscordBotPihole">
-            <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white" alt="Use git">
+        <a href="https://github.com/Asthowen/DiscordBotPihole/blob/main/LICENSE">
+            <img src="https://img.shields.io/github/license/Asthowen/DiscordBotPihole?style=for-the-badge" alt="License">
         </a>
-        <a href="https://discord.com">
-            <img src="https://img.shields.io/badge/Discord-7289DA?style=for-the-badge&logo=discord&logoColor=white" alt="Discord bot">
+        <a href="https://github.com/Asthowen/DiscordBotPihole/stargazers">
+            <img src="https://img.shields.io/github/stars/Asthowen/DiscordBotPihole?style=for-the-badge" alt="Stars">
         </a>
     </div>
     <h3>
         <strong>A Discord bot for get Pi-Hole stats written in Rust.</strong>
     </h3>
 </div>
+
+## Archive
+
+I've archived this repository because I don't use Pi-Hole at all anymore, at the time I'm archiving it, the code is fully functional. In case you encounter a problem you can open an issue [here](https://github.com/Asthowen/DiscordBotPihole/issues), although I don't necessarily guarantee a quick fix.
 
 ## Usage
 To use this bot you must create a Discord application.
